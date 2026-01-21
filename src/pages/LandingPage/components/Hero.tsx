@@ -9,6 +9,23 @@ export function LandingHero() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const [hoveredPin, setHoveredPin] = useState<{ color: string; coords: [number, number] } | null>(null);
+  const [popoverPosition, setPopoverPosition] = useState<{ left: number; top: number } | null>(null);
+
+  // Update popover position when hoveredPin changes
+  useEffect(() => {
+    if (hoveredPin && mapRef.current && mapContainer.current) {
+      const map = mapRef.current;
+      const pt = map.project(hoveredPin.coords);
+      const rect = mapContainer.current.getBoundingClientRect();
+      
+      setPopoverPosition({
+        left: rect.left + pt.x,
+        top: rect.top + pt.y,
+      });
+    } else {
+      setPopoverPosition(null);
+    }
+  }, [hoveredPin]);
 
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return;
@@ -383,7 +400,7 @@ export function LandingHero() {
               duration={4000}
             />
           </h1>
-          <p className="mb-3 md:mb-8 text-[14px] sm:text-[16px] md:text-[18px] xl:text-[19px] text-gray-300 leading-relaxed max-w-[600px] xl:max-w-[650px]">
+          <p className="mb-3 md:mb-8 text-[14px] sm:text-[16px] md:text-[18px] xl:text-[19px] text-gray-300 leading-relaxed max-w-[600px] xl:max-w-[610px]">
             A simple, reliable terminal powered by LoRa—helping communities send SOS alerts, share updates, and guide rescuers when flooding strikes.
           </p>
         </div>
@@ -451,76 +468,66 @@ export function LandingHero() {
       <div className="overflow-hidden hero-map" ref={mapContainer}></div>
 
       {/* Pin Hover Popover */}
-      {hoveredPin && mapRef.current && (() => {
-        const map = mapRef.current;
-        const pt = map.project(hoveredPin.coords);
-        const rect = mapContainer.current?.getBoundingClientRect();
-        
-        // Calculate position relative to the map container
-        const left = (rect?.left ?? 0) + pt.x;
-        const top = (rect?.top ?? 0) + pt.y;
-        
-        return (
+      {hoveredPin && popoverPosition && (
+        <div
+          style={{
+            position: "absolute",
+            left: popoverPosition.left,
+            top: popoverPosition.top,
+            transform: `translate(-46%, calc(-100% - 24px))`,
+            zIndex: 1000,
+            pointerEvents: "none",
+          }}
+        >
           <div
             style={{
-              position: "absolute",
-              left: left,
-              top: top,
-              transform: `translate(-46%, calc(-100% - 24px))`,
-              zIndex: 1000,
-              pointerEvents: "none",
+              position: "relative",
+              backgroundColor: "rgba(0, 0, 0, 0.85)",
+              color: "#fff",
+              padding: "10px 14px",
+              borderRadius: "6px",
+              fontSize: "13px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+              maxWidth: "280px",
+              lineHeight: "1.4",
             }}
           >
+            {hoveredPin.color === "#ef4444" && (
+              <>
+                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#ef4444" }}>Critical Alert</div>
+                <div>The LoRa terminal detects the flood water is high.</div>
+              </>
+            )}
+            {hoveredPin.color === "#eab308" && (
+              <>
+                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#eab308" }}>User-Initiated</div>
+                <div>The user clicked the distress signal of LoRa terminal calling for rescue.</div>
+              </>
+            )}
+            {hoveredPin.color === "#3b82f6" && (
+              <>
+                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#3b82f6" }}>Normal</div>
+                <div>No distress signal detected.</div>
+              </>
+            )}
+            
+            {/* Downward arrow pointer */}
             <div
               style={{
-                position: "relative",
-                backgroundColor: "rgba(0, 0, 0, 0.85)",
-                color: "#fff",
-                padding: "10px 14px",
-                borderRadius: "6px",
-                fontSize: "13px",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-                maxWidth: "280px",
-                lineHeight: "1.4",
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+                bottom: "-16.5px",
+                width: 0,
+                height: 0,
+                borderLeft: "15px solid transparent",
+                borderRight: "15px solid transparent",
+                borderTop: "18px solid rgba(0, 0, 0, 0.85)",
               }}
-            >
-              {hoveredPin.color === "#ef4444" && (
-                <>
-                  <div style={{ fontWeight: "600", marginBottom: "4px", color: "#ef4444" }}>Critical Alert</div>
-                  <div>The LoRa terminal detects the flood water is high.</div>
-                </>
-              )}
-              {hoveredPin.color === "#eab308" && (
-                <>
-                  <div style={{ fontWeight: "600", marginBottom: "4px", color: "#eab308" }}>User-Initiated</div>
-                  <div>The user clicked the distress signal of LoRa terminal calling for rescue.</div>
-                </>
-              )}
-              {hoveredPin.color === "#3b82f6" && (
-                <>
-                  <div style={{ fontWeight: "600", marginBottom: "4px", color: "#3b82f6" }}>Normal</div>
-                  <div>No distress signal detected.</div>
-                </>
-              )}
-              
-              {/* Downward arrow pointer */}
-              <div
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  bottom: "-16.5px",
-                  width: 0,
-                  height: 0,
-                  borderLeft: "15px solid transparent",
-                  borderRight: "15px solid transparent",
-                  borderTop: "18px solid rgba(0, 0, 0, 0.85)",
-                }}
-              />
-            </div>
+            />
           </div>
-        );
-      })()}
+        </div>
+      )}
     </main>
   );
 }

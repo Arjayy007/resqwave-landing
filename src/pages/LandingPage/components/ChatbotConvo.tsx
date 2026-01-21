@@ -134,8 +134,18 @@ export function ChatbotConvo() {
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       // Show initial greeting and fetch dynamic quick actions in parallel
-      setIsTyping(true);
-      setGreetingShown(false);
+      const timer = setTimeout(() => {
+        setMessages([
+          {
+            id: 1,
+            text: greetingMessage,
+            sender: "bot",
+            timestamp: new Date(),
+          },
+        ]);
+        setIsTyping(false);
+        setGreetingShown(true);
+      }, 1000);
 
       // Fetch quick actions from backend
       (async () => {
@@ -153,18 +163,11 @@ export function ChatbotConvo() {
         }
       })();
 
-      setTimeout(() => {
-        setMessages([
-          {
-            id: 1,
-            text: greetingMessage,
-            sender: "bot",
-            timestamp: new Date(),
-          },
-        ]);
-        setIsTyping(false);
-        setGreetingShown(true);
-      }, 1000);
+      // Set initial state in a separate effect
+      setIsTyping(true);
+      setGreetingShown(false);
+
+      return () => clearTimeout(timer);
     }
   }, [isOpen, messages.length, greetingMessage]);
 
@@ -220,9 +223,9 @@ export function ChatbotConvo() {
           console.error("Quick actions error:", err);
         }
       })();
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Check if error was due to abort
-      if (error.name === 'AbortError') {
+      if (error instanceof Error && error.name === 'AbortError') {
         console.log("Request was aborted by user");
         setIsTyping(false);
         abortControllerRef.current = null;
