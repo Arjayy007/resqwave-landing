@@ -1,0 +1,174 @@
+/* CRITICAL: Force default cursor globally - must be at top */
+*,
+*::before,
+*::after,
+html,
+body,
+div,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+nav,
+section,
+article,
+main,
+footer {
+  cursor: default !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+body,
+html {
+  font-family: "Geist", sans-serif;
+  cursor: default !important;
+  user-select: none !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body,
+html,
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Prevent text cursor on mapbox canvas and other non-input elements */
+.mapboxgl-canvas,
+.mapboxgl-canvas-container,
+.mapboxgl-ctrl-attrib,
+.mapboxgl-ctrl,
+canvas,
+div,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: default !important;
+}
+
+/* Only show text cursor on actual text inputs */
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not(
+    [type="checkbox"]
+  ):not([type="radio"]),
+textarea,
+[contenteditable="true"] {
+  cursor: text !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+}
+
+/* Pointer cursor for clickable elements */
+button,
+a,
+[role="button"],
+[type="button"],
+[type="submit"],
+select {
+  cursor: pointer !important;
+}
+
+.primary-background {
+  background-color: #171717;
+}
+
+.header-navs {
+  color: #707070;
+  display: flex;
+  gap: 2rem;
+  font-size: 14px;
+}
+
+.header-navs a {
+  color: #fff;
+  font-weight: 300;
+  transition: color 0.3s, font-weight 0.3s;
+  text-underline-offset: 6px;
+  position: relative;
+}
+
+.header-navs a.importance-link .underline-effect {
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  background: #4987f1;
+  border-radius: 1px;
+  opacity: 0.7;
+  width: 0;
+  transition: width 0.2s ease-in;
+}
+
+.header-navs a.importance-link:hover .underline-effect {
+  width: 100%;
+}
+
+.header-navs a:hover {
+  color: #4283f1;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.header-navs a.importance-link:hover {
+  text-decoration: none;
+}
+
+/* Header animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownFadeIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.animate-slideDownFadeIn {
+  animation: slideDownFadeIn 0.25s ease-out forwards;
+}
+
+.global-radial-gradient {
+  position: fixed;
+  z-index: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(50px);
+}
