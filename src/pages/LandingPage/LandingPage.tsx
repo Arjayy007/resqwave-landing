@@ -54,25 +54,17 @@ export function LandingPage() {
   }, [lastScrollY]);
 
   return (
-    <div className="min-h-screen text-white flex flex-col primary-background" style={{ position: 'relative', overflow: 'hidden', maxWidth: '100vw', width: '100%' }}>
+    <div className="min-h-screen text-white flex flex-col bg-[#171717] relative overflow-x-hidden w-full">
       {/* Global Radial Gradient Backgrounds with animation */}
       <div
-        className="global-radial-gradient"
+        className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(600px,80vw,900px)] h-[clamp(600px,80vw,900px)] -right-[10%] top-[85%] lg:top-[90%]"
         style={{
-          right: '-8%',
-          top: '90%',
-          width: 'min(900px, 80vw)',
-          height: 'min(900px, 80vw)',
           background: 'radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 50%, rgba(23, 23, 23, 0.1) 100%)',
         }}
       />
       <div
-        className="global-radial-gradient"
+        className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(650px,85vw,950px)] h-[clamp(650px,85vw,950px)] -left-[15%] lg:-left-[10%] -top-[30%] lg:-top-[35%]"
         style={{
-          left: '-11%',
-          top: '-35%',
-          width: 'min(950px, 85vw)',
-          height: 'min(950px, 85vw)',
           background: 'radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 40%, rgba(23, 23, 23, 0.1) 100%)',
         }}
       />

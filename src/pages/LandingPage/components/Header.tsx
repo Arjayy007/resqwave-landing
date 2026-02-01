@@ -26,22 +26,22 @@ export function LandingHeader({ navOpen, setNavOpen, isScrolled, showHeader }: {
         <span className="font-medium text-sm ">ResQWave</span>
       </a>
       <div className="hidden md:block">
-        <nav className="header-navs">
-          <a href="#importance" className="importance-link font-medium">
+        <nav className="flex gap-8 text-sm">
+          <a href="#importance" className="relative text-white font-medium transition-all duration-300 hover:text-[#4283f1] group">
             Importance
-            <span className="underline-effect" />
+            <span className="absolute left-0 -bottom-1 h-0.5 bg-[#4987f1] rounded-sm opacity-70 w-0 group-hover:w-full transition-all duration-200" />
           </a>
-          <a href="#how" className="importance-link font-medium">
+          <a href="#how" className="relative text-white font-medium transition-all duration-300 hover:text-[#4283f1] group">
             How it works
-            <span className="underline-effect" />
+            <span className="absolute left-0 -bottom-1 h-0.5 bg-[#4987f1] rounded-sm opacity-70 w-0 group-hover:w-full transition-all duration-200" />
           </a>
-          <a href="#impact" className="importance-link font-medium">
+          <a href="#impact" className="relative text-white font-medium transition-all duration-300 hover:text-[#4283f1] group">
             Impact
-            <span className="underline-effect" />
+            <span className="absolute left-0 -bottom-1 h-0.5 bg-[#4987f1] rounded-sm opacity-70 w-0 group-hover:w-full transition-all duration-200" />
           </a>
-          <a href="#faqs" className="importance-link font-medium">
+          <a href="#faqs" className="relative text-white font-medium transition-all duration-300 hover:text-[#4283f1] group">
             FAQs
-            <span className="underline-effect" />
+            <span className="absolute left-0 -bottom-1 h-0.5 bg-[#4987f1] rounded-sm opacity-70 w-0 group-hover:w-full transition-all duration-200" />
           </a>
         </nav>
       </div>

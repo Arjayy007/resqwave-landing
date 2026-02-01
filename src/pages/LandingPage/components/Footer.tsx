@@ -4,9 +4,9 @@ import resqwave_logo from '/resqwave_logo.png';
 
 export function LandingFooter() {
   return (
-    <footer className="w-full bg-[#171717] text-white py-12 px-8 md:px-16">
+    <footer className="w-full bg-[#171717] text-white py-8 sm:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Left Section - Logo and Info */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">

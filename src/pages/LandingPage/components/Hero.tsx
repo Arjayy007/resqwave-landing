@@ -345,7 +345,7 @@ export function LandingHero() {
   }, []);
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-4 md:px-8 lg:px-12 xl:px-16 gap-8 w-full relative overflow-hidden h-screen min-h-screen pt-20 md:pt-24" style={{ zIndex: 20 }}>
+    <main className="flex flex-1 flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 gap-6 sm:gap-8 w-full relative overflow-hidden min-h-screen pt-20 sm:pt-24 pb-8 sm:pb-12" style={{ zIndex: 20 }}>
       <div className="hero-content-wrapper w-full flex flex-col justify-center gap-4 items-center xl:items-start max-w-2xl xl:max-w-none">
         <style>{`
           .hero-content-wrapper {
@@ -355,20 +355,15 @@ export function LandingHero() {
           .hero-content {
             text-align: center;
             width: 100%;
+            padding: 0 1rem;
           }
           
           @media (min-width: 1280px) {
             .hero-content {
-              margin-left: 50px;
-              margin-top: -60px;
+              margin-left: clamp(40px, 4vw, 60px);
+              margin-top: clamp(-80px, -5vw, -40px);
               text-align: left;
-            }
-          }
-          
-          @media (min-width: 1536px) {
-            .hero-content {
-              margin-left: 30px;
-              margin-top: -80px;
+              padding: 0;
             }
           }
         `}</style>
@@ -410,7 +405,7 @@ export function LandingHero() {
         .hero-map {
           width: 100%;
           max-width: 500px;
-          height: 400px;
+          height: 350px;
           position: relative;
           z-index: 1;
           border-radius: 24px;
@@ -420,20 +415,24 @@ export function LandingHero() {
           transition: all 0.4s ease-in-out;
         }
         
+        @media (min-width: 640px) {
+          .hero-map {
+            height: 400px;
+          }
+        }
+        
         @media (min-width: 1280px) {
           .hero-map {
-            width: 45%;
-            min-width: 700px;
-            height: 580px;
+            width: clamp(600px, 45vw, 800px);
+            max-width: none;
+            height: clamp(500px, 45vh, 580px);
             position: absolute;
             right: 0;
-            top: 52%;
+            top: 50%;
             transform: translateY(-50%);
             border-radius: 0;
-            border-top-left-radius: 48px;
-            border-bottom-left-radius: 48px;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
+            border-top-left-radius: clamp(40px, 3vw, 48px);
+            border-bottom-left-radius: clamp(40px, 3vw, 48px);
             border-right: none;
             border-left: 10px solid #292929;
             border-top: 10px solid #292929;
@@ -443,24 +442,12 @@ export function LandingHero() {
           }
         }
         
-        @media (min-width: 1560px) {
+        @media (min-width: 1536px) {
           .hero-map {
-            width: 48%;
-            min-width: 700px;
-            height: 600px;
-            border-top-left-radius: 56px;
-            border-bottom-left-radius: 56px;
-            border-left: 11px solid #292929;
-            border-top: 11px solid #292929;
-            border-bottom: 11px solid #292929;
-          }
-        }
-        
-        @media (min-width: 1800px) {
-          .hero-map {
-            width: 50%;
-            min-width: 800px;
-            height: 650px;
+            width: clamp(650px, 48vw, 900px);
+            height: clamp(550px, 50vh, 650px);
+            border-top-left-radius: clamp(48px, 3.5vw, 56px);
+            border-bottom-left-radius: clamp(48px, 3.5vw, 56px);
           }
         }
       `}</style>

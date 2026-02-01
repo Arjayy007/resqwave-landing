@@ -30,43 +30,41 @@ export function LandingNumbers() {
   ];
 
   return (
-    <section id="impact" className="min-h-screen flex items-center px-8 md:px-16 lg:px-24 py-16">
+    <section id="impact" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-          {/* Left Side - Text Content (40% width) */}
-          <div className="space-y-6 lg:w-[45%]">
-            <h2 className="text-4xl md:text-5xl font-bold">By the Numbers</h2>
-            <p className="text-gray-400 text-lg leading-relaxed">
+        <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
+          {/* Left Side - Text Content */}
+          <div className="space-y-4 sm:space-y-6 lg:w-[45%] xl:w-[40%] text-center lg:text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">By the Numbers</h2>
+            <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
               Behind these numbers are real families, neighbors, and communities made safer through ResQWave,
               where reliable LoRa-powered terminals turn urgent signals into life-saving action.
             </p>
           </div>
 
-          {/* Right Side - Stats Grid (50% width) */}
-          <div className="grid grid-cols-1 pl-3 sm:grid-cols-2 gap-x-10 gap-y-10 lg:w-[55%]">
+          {/* Right Side - Stats Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 lg:w-[55%] xl:w-[60%] w-full max-w-2xl lg:max-w-none">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`bg-zinc-800/50 backdrop-blur-sm rounded-[5px] p-10 border border-zinc-700/50 hover:border-zinc-600/50 transition-all hover:transform hover:scale-105 ${
-                  index < 2 ? 'sm:translate-x-20 lg:translate-x-24' : ''
-                }`}
+                className="bg-zinc-800/50 backdrop-blur-sm rounded-[5px] p-6 sm:p-8 lg:p-10 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-300 hover:scale-105"
               >
                 <div className="flex flex-col h-full">
                   {/* Icon */}
-                  <div className="mb-4">{stat.icon}</div>
+                  <div className="mb-3 sm:mb-4">{stat.icon}</div>
                   
                   {/* Title */}
-                  <h3 className="text-white font-semibold mb-4 text-base">
+                  <h3 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
                     {stat.title}
                   </h3>
                   
                   {/* Value */}
-                  <div className="text-6xl font-bold text-white mb-4">
-                    <NumberTicker value={stat.value} className="text-6xl font-bold text-white" />
+                  <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4">
+                    <NumberTicker value={stat.value} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white" />
                   </div>
                   
                   {/* Description */}
-                  <p className="text-gray-400 text-base leading-relaxed">
+                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
                     {stat.description}
                   </p>
                 </div>

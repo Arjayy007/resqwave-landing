@@ -105,12 +105,12 @@ export function LandingGoal() {
                     <source src={videoUrl} type="video/mp4" />
                 </video>
                 {/* Fade overlay on the right side */}
-                <div className="absolute top-0 right-0 w-full lg:w-[90vw] h-full bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-full lg:w-[85vw] h-full bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none"></div>
             </div>
             
             {/* Scrollable Content */}
-            <div className="absolute top-0 left-0 right-0 mx-auto w-full lg:w-[50vw] lg:left-auto lg:right-0 lg:mx-0 min-h-full z-10">
-                <div className="max-w-xl mx-auto lg:ml-[-10px] px-8 lg:pl-12 pt-24">
+            <div className="absolute top-0 left-0 right-0 mx-auto w-full lg:w-[min(55vw,800px)] lg:left-auto lg:right-0 lg:mx-0 min-h-full z-10">
+                <div className="max-w-xl mx-auto lg:ml-0 px-6 sm:px-8 lg:px-12 xl:px-16 pt-24">
                     {/* Section 1: Why ResQWave Matters */}
                     <div className="tabs_let-content min-h-screen flex items-center opacity-30 transition-opacity duration-500">
                         <div>
