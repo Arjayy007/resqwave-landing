@@ -360,8 +360,8 @@ export function LandingHero() {
           
           @media (min-width: 1280px) {
             .hero-content {
-              margin-left: clamp(40px, 4vw, 60px);
-              margin-top: clamp(-80px, -5vw, -40px);
+              margin-left: clamp(20px, 2vw, 30px);
+              margin-top: clamp(-40px, -2vw, -10px);
               text-align: left;
               padding: 0;
             }
