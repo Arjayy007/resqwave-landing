@@ -132,8 +132,10 @@ export function ChatbotConvo() {
 
   // Show initial greeting when chat opens
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
+    if (isOpen && messages.length === 0 && !greetingShown) {
       // Show initial greeting and fetch dynamic quick actions in parallel
+      setIsTyping(true);
+      
       const timer = setTimeout(() => {
         setMessages([
           {
@@ -163,13 +165,9 @@ export function ChatbotConvo() {
         }
       })();
 
-      // Set initial state in a separate effect
-      setIsTyping(true);
-      setGreetingShown(false);
-
       return () => clearTimeout(timer);
     }
-  }, [isOpen, messages.length, greetingMessage]);
+  }, [isOpen, messages.length, greetingMessage, greetingShown]);
 
   const handleSendMessage = async (messageText?: string) => {
     const textToSend = messageText ?? inputValue;
