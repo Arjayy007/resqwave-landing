@@ -8,8 +8,14 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 export function LandingHero() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const [hoveredPin, setHoveredPin] = useState<{ color: string; coords: [number, number] } | null>(null);
-  const [popoverPosition, setPopoverPosition] = useState<{ left: number; top: number } | null>(null);
+  const [hoveredPin, setHoveredPin] = useState<{
+    color: string;
+    coords: [number, number];
+  } | null>(null);
+  const [popoverPosition, setPopoverPosition] = useState<{
+    left: number;
+    top: number;
+  } | null>(null);
 
   // Update popover position when hoveredPin changes
   useEffect(() => {
@@ -17,7 +23,7 @@ export function LandingHero() {
       const map = mapRef.current;
       const pt = map.project(hoveredPin.coords);
       const rect = mapContainer.current.getBoundingClientRect();
-      
+
       setPopoverPosition({
         left: rect.left + pt.x,
         top: rect.top + pt.y,
@@ -32,7 +38,7 @@ export function LandingHero() {
 
     const map = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: "mapbox://styles/mapbox/streets-v12",
       center: [121.05372821089554, 14.75625635522509],
       zoom: 13,
       pitch: 0,
@@ -42,23 +48,34 @@ export function LandingHero() {
     mapRef.current = map;
 
     map.dragRotate.enable();
-    if (map.touchZoomRotate && 'enableRotation' in map.touchZoomRotate && typeof map.touchZoomRotate.enableRotation === 'function') {
+    if (
+      map.touchZoomRotate &&
+      "enableRotation" in map.touchZoomRotate &&
+      typeof map.touchZoomRotate.enableRotation === "function"
+    ) {
       map.touchZoomRotate.enableRotation();
     }
 
     map.on("load", () => {
-      const cinematicEasing = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const cinematicEasing = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
       // Helper function to create a circle polygon
-      const createCircle = (center: [number, number], radiusInMeters: number, points = 64) => {
+      const createCircle = (
+        center: [number, number],
+        radiusInMeters: number,
+        points = 64,
+      ) => {
         const coords: [number, number][] = [];
         const earthRadius = 6378137;
         const lat = (center[1] * Math.PI) / 180;
         const lon = (center[0] * Math.PI) / 180;
         for (let i = 0; i < points; i++) {
           const angle = (i * 360) / points;
-          const dx = (radiusInMeters * Math.cos((angle * Math.PI) / 180)) / earthRadius;
-          const dy = (radiusInMeters * Math.sin((angle * Math.PI) / 180)) / earthRadius;
+          const dx =
+            (radiusInMeters * Math.cos((angle * Math.PI) / 180)) / earthRadius;
+          const dy =
+            (radiusInMeters * Math.sin((angle * Math.PI) / 180)) / earthRadius;
           const newLon = lon + dx / Math.cos(lat);
           const newLat = lat + dy;
           coords.push([(newLon * 180) / Math.PI, (newLat * 180) / Math.PI]);
@@ -78,28 +95,34 @@ export function LandingHero() {
         if (!map.getSource("floods-metro-manila")) {
           map.addSource("floods-metro-manila", {
             type: "vector",
-            url: "mapbox://rodelll.3lm08j9b"
+            url: "mapbox://rodelll.3lm08j9b",
           });
         }
 
         if (!map.getLayer("flood-polygons-metro-manila")) {
-          map.addLayer({
-            id: "flood-polygons-metro-manila",
-            type: "fill",
-            source: "floods-metro-manila",
-            "source-layer": "MetroManila_Flood",
-            paint: {
-              "fill-color": [
-                "match",
-                ["get", "Var"],
-                1, "#ffff00",
-                2, "#ff9900",
-                3, "#ff0000",
-                "#000000"
-              ],
-              "fill-opacity": 0.5
-            }
-          }, "waterway-label");
+          map.addLayer(
+            {
+              id: "flood-polygons-metro-manila",
+              type: "fill",
+              source: "floods-metro-manila",
+              "source-layer": "MetroManila_Flood",
+              paint: {
+                "fill-color": [
+                  "match",
+                  ["get", "Var"],
+                  1,
+                  "#ffff00",
+                  2,
+                  "#ff9900",
+                  3,
+                  "#ff0000",
+                  "#000000",
+                ],
+                "fill-opacity": 0.5,
+              },
+            },
+            "waterway-label",
+          );
         }
       } catch (e) {
         console.warn("Could not add flood polygons", e);
@@ -109,29 +132,35 @@ export function LandingHero() {
       try {
         // Pin coordinates and colors
         const pins = [
-          { 
-            coords: [121.05506938449884, 14.751882964225857] as [number, number], 
+          {
+            coords: [121.05506938449884, 14.751882964225857] as [
+              number,
+              number,
+            ],
             color: "#ef4444",
             label: "Immediate Rescue Needed",
-            id: "red"
+            id: "red",
           },
-          { 
-            coords: [121.05544250933724, 14.757527125034343]as [number, number], 
+          {
+            coords: [121.05544250933724, 14.757527125034343] as [
+              number,
+              number,
+            ],
             color: "#eab308",
             label: "Moderate Flood Alert",
-            id: "yellow"
+            id: "yellow",
           },
-          { 
-            coords: [121.0596652039547, 14.752071361725228] as [number, number], 
+          {
+            coords: [121.0596652039547, 14.752071361725228] as [number, number],
             color: "#22c55e",
             label: "Online",
-            id: "green"
+            id: "green",
           },
-          { 
-            coords: [121.0599999949547, 14.75595959598] as [number, number], 
+          {
+            coords: [121.0599999949547, 14.75595959598] as [number, number],
             color: "#6b7280",
             label: "Offline",
-            id: "gray"
+            id: "gray",
           },
         ];
 
@@ -139,14 +168,14 @@ export function LandingHero() {
         pins.forEach((pin) => {
           // Skip green and gray pins - no circle
           if (pin.id === "green" || pin.id === "gray") return;
-          
+
           const circleSourceId = `pin-circle-${pin.id}`;
           const circleLayerId = `pin-circle-layer-${pin.id}`;
 
           if (!map.getSource(circleSourceId)) {
             map.addSource(circleSourceId, {
               type: "geojson",
-              data: createCircle(pin.coords, 150) // 150 meter radius
+              data: createCircle(pin.coords, 150), // 150 meter radius
             });
           }
 
@@ -164,7 +193,7 @@ export function LandingHero() {
         });
 
         // Add second circle for red pin (outer circle)
-        const redPin = pins.find(pin => pin.id === "red");
+        const redPin = pins.find((pin) => pin.id === "red");
         if (redPin) {
           const circleSourceId2 = `pin-circle-${redPin.id}-outer`;
           const circleLayerId2 = `pin-circle-layer-${redPin.id}-outer`;
@@ -172,7 +201,7 @@ export function LandingHero() {
           if (!map.getSource(circleSourceId2)) {
             map.addSource(circleSourceId2, {
               type: "geojson",
-              data: createCircle(redPin.coords, 200) // 200 meter radius for outer circle
+              data: createCircle(redPin.coords, 200), // 200 meter radius for outer circle
             });
           }
 
@@ -213,7 +242,9 @@ export function LandingHero() {
               }
             }
 
-            const source = map.getSource(`pin-circle-${pinId}`) as mapboxgl.GeoJSONSource;
+            const source = map.getSource(
+              `pin-circle-${pinId}`,
+            ) as mapboxgl.GeoJSONSource;
             if (source) {
               source.setData(createCircle(pinCoords, currentRadius1));
             }
@@ -240,7 +271,9 @@ export function LandingHero() {
               }
             }
 
-            const source = map.getSource(`pin-circle-${pinId}-outer`) as mapboxgl.GeoJSONSource;
+            const source = map.getSource(
+              `pin-circle-${pinId}-outer`,
+            ) as mapboxgl.GeoJSONSource;
             if (source) {
               source.setData(createCircle(pinCoords, currentRadius2));
             }
@@ -254,7 +287,7 @@ export function LandingHero() {
         }
 
         // Animate yellow pin circle with pulsing effect
-        const yellowPin = pins.find(pin => pin.id === "yellow");
+        const yellowPin = pins.find((pin) => pin.id === "yellow");
         if (yellowPin) {
           const pinId = yellowPin.id;
           const pinCoords = yellowPin.coords;
@@ -277,7 +310,9 @@ export function LandingHero() {
               }
             }
 
-            const source = map.getSource(`pin-circle-${pinId}`) as mapboxgl.GeoJSONSource;
+            const source = map.getSource(
+              `pin-circle-${pinId}`,
+            ) as mapboxgl.GeoJSONSource;
             if (source) {
               source.setData(createCircle(pinCoords, currentRadius));
             }
@@ -289,7 +324,6 @@ export function LandingHero() {
           setTimeout(() => animateYellowCircle(), 1000);
         }
 
-
         // Add pins source
         if (!map.getSource("static-pins")) {
           map.addSource("static-pins", {
@@ -299,9 +333,9 @@ export function LandingHero() {
               features: pins.map((pin) => ({
                 type: "Feature" as const,
                 properties: { color: pin.color, id: pin.id },
-                geometry: { 
-                  type: "Point" as const, 
-                  coordinates: pin.coords 
+                geometry: {
+                  type: "Point" as const,
+                  coordinates: pin.coords,
                 },
               })),
             },
@@ -326,13 +360,13 @@ export function LandingHero() {
         // Add hover interaction for pins
         map.on("mouseenter", "static-pins-layer", (e) => {
           map.getCanvas().style.cursor = "pointer";
-          
+
           if (e.features && e.features.length > 0) {
             const feature = e.features[0];
             const geom = feature.geometry as GeoJSON.Point;
             const coords = geom.coordinates as [number, number];
             const color = feature.properties?.color;
-            
+
             setHoveredPin({
               color: color,
               coords: coords,
@@ -387,7 +421,10 @@ export function LandingHero() {
   }, []);
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 gap-6 sm:gap-8 w-full relative overflow-hidden min-h-screen pt-20 sm:pt-24 pb-8 sm:pb-12" style={{ zIndex: 20 }}>
+    <main
+      className="flex flex-1 flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 gap-6 sm:gap-8 w-full relative overflow-hidden min-h-screen pt-20 sm:pt-24 pb-8 sm:pb-12"
+      style={{ zIndex: 20 }}
+    >
       <div className="hero-content-wrapper w-full flex flex-col justify-center gap-4 items-center xl:items-start max-w-2xl xl:max-w-none">
         <style>{`
           .hero-content-wrapper {
@@ -412,12 +449,14 @@ export function LandingHero() {
         <div className="hero-content w-full">
           <div className="flex gap-3 mb-4 md:mb-6 flex-wrap justify-center xl:justify-start">
             <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px]">
-              <MonitorSmartphone className="text-sm text-zinc-300"/>
-              <span className="text-sm text-zinc-300">IoT</span>
+              <MonitorSmartphone className="text-sm text-zinc-300" />
+              <span className="text-sm text-zinc-300">Internet of Things</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px]">
               <Waves className="text-sm text-zinc-300" />
-              <span className="text-sm text-zinc-300">Disaster Preparedness</span>
+              <span className="text-sm text-zinc-300">
+                Disaster Preparedness
+              </span>
             </div>
           </div>
           <h1
@@ -427,18 +466,24 @@ export function LandingHero() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              color: "transparent"
+              color: "transparent",
             }}
           >
-            Stronger Signals,<br />
-            <LayoutTextFlip 
+            Stronger Signals,
+            <br />
+            <LayoutTextFlip
               text=""
-              words={["Safer Communities", "Connected Lives", "Resilient Communities"]}
+              words={[
+                "Safer Communities",
+                "Connected Lives",
+                "Resilient Communities",
+              ]}
               duration={4000}
             />
           </h1>
           <p className="mb-3 md:mb-8 text-[14px] sm:text-[16px] md:text-[18px] xl:text-[19px] text-gray-300 leading-relaxed max-w-[600px] xl:max-w-[610px]">
-            A simple, reliable terminal powered by LoRa—helping communities send SOS alerts, share updates, and guide rescuers when flooding strikes.
+            A simple, reliable terminal powered by LoRa—helping communities send
+            SOS alerts, share updates, and guide rescuers when flooding strikes.
           </p>
         </div>
       </div>
@@ -493,7 +538,7 @@ export function LandingHero() {
           }
         }
       `}</style>
-      
+
       <div className="overflow-hidden hero-map" ref={mapContainer}></div>
 
       {/* Pin Hover Popover */}
@@ -523,29 +568,64 @@ export function LandingHero() {
           >
             {hoveredPin.color === "#ef4444" && (
               <>
-                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#ef4444" }}>Critical Alert</div>
+                <div
+                  style={{
+                    fontWeight: "600",
+                    marginBottom: "4px",
+                    color: "#ef4444",
+                  }}
+                >
+                  Critical Alert
+                </div>
                 <div>The LoRa terminal detects the flood water is high.</div>
               </>
             )}
             {hoveredPin.color === "#eab308" && (
               <>
-                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#eab308" }}>User-Initiated</div>
-                <div>The user clicked the distress signal of LoRa terminal calling for rescue.</div>
+                <div
+                  style={{
+                    fontWeight: "600",
+                    marginBottom: "4px",
+                    color: "#eab308",
+                  }}
+                >
+                  User-Initiated
+                </div>
+                <div>
+                  The user clicked the distress signal of LoRa terminal calling
+                  for rescue.
+                </div>
               </>
             )}
             {hoveredPin.color === "#22c55e" && (
               <>
-                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#22c55e" }}>Online</div>
+                <div
+                  style={{
+                    fontWeight: "600",
+                    marginBottom: "4px",
+                    color: "#22c55e",
+                  }}
+                >
+                  Online
+                </div>
                 <div>Online terminal with no distress signal detected.</div>
               </>
             )}
             {hoveredPin.color === "#6b7280" && (
               <>
-                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#6b7280" }}>Offline</div>
+                <div
+                  style={{
+                    fontWeight: "600",
+                    marginBottom: "4px",
+                    color: "#6b7280",
+                  }}
+                >
+                  Offline
+                </div>
                 <div>Terminal is offline.</div>
               </>
             )}
-            
+
             {/* Downward arrow pointer */}
             <div
               style={{
