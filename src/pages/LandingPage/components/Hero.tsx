@@ -369,12 +369,12 @@ export function LandingHero() {
         `}</style>
         <div className="hero-content w-full">
           <div className="flex gap-3 mb-4 md:mb-6 flex-wrap justify-center xl:justify-start">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px] border border-zinc-700/50 hover:bg-zinc-800/70 hover:border-zinc-600/70 cursor-pointer">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px]">
               <MonitorSmartphone className="text-sm text-zinc-300"/>
               <span className="text-sm text-zinc-300">IoT</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px] border border-zinc-700/50 hover:bg-zinc-800/70 hover:border-zinc-600/70 cursor-pointer">
-              <Waves className="w-4 h-4 text-zinc-400" />
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px]">
+              <Waves className="text-sm text-zinc-300" />
               <span className="text-sm text-zinc-300">Disaster Preparedness</span>
             </div>
           </div>
@@ -429,7 +429,7 @@ export function LandingHero() {
             position: absolute;
             right: 0;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-47%);
             border-radius: 0;
             border-top-left-radius: clamp(40px, 3vw, 48px);
             border-bottom-left-radius: clamp(40px, 3vw, 48px);

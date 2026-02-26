@@ -1,5 +1,4 @@
 import androidIcon from '@/assets/android.png';
-import iosIcon from '@/assets/ios.png';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import resqwave_logo from '/resqwave_logo.png';
@@ -9,7 +8,7 @@ export function LandingHeader({ navOpen, setNavOpen, isScrolled, showHeader }: {
 
   return (
     <header
-      className={`flex items-center justify-between px-6 md:px-12 py-3 w-full fixed top-0 left-0 right-0`}
+      className={`flex items-center justify-between px-8 md:px-16 py-4 md:py-6 w-full fixed top-0 left-0 right-0`}
       style={{
         background: isScrolled ? 'rgba(24, 24, 27, 0.5)' : 'transparent',
         backdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
@@ -22,11 +21,11 @@ export function LandingHeader({ navOpen, setNavOpen, isScrolled, showHeader }: {
     >
       {/* Left side: logo and name */}
       <a href="/" className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-        <img src={resqwave_logo} alt="ResQWave Logo" className="h-auto w-6" />
-        <span className="font-medium text-sm ">ResQWave</span>
+        <img src={resqwave_logo} alt="ResQWave Logo" className="h-auto w-7" />
+        <span className="font-medium text-base ">ResQWave</span>
       </a>
       <div className="hidden md:block">
-        <nav className="flex gap-8 text-sm">
+        <nav className="flex gap-8 text-base">
           <a href="#importance" className="relative text-white font-medium transition-all duration-300 hover:text-[#4283f1] group">
             Importance
             <span className="absolute left-0 -bottom-1 h-0.5 bg-[#4987f1] rounded-sm opacity-70 w-0 group-hover:w-full transition-all duration-200" />
@@ -47,10 +46,9 @@ export function LandingHeader({ navOpen, setNavOpen, isScrolled, showHeader }: {
       </div>
       {/* Desktop nav and button */}
       <div className="hidden md:flex  items-center justify-end gap-2">
-        <Button className="bg-[#5B9EFF] hover:bg-[#4A8EEE] transition-colors duration-300 cursor-pointer text-white text-xs px-4 py-1 rounded-[5px] font-medium flex items-center gap-1" onClick={() => {}}>
-          Get the App
-          <img src={androidIcon} alt="Android" className="h-4 w-4" />
-          <img src={iosIcon} alt="iOS" className="h-4 w-4" />
+        <Button className="bg-[#5B9EFF] hover:bg-[#4A8EEE] transition-colors duration-300 cursor-pointer text-white text-sm px-5 py-4 rounded-[5px] font-medium flex items-center gap-1" onClick={() => {}}>
+          <img src={androidIcon} alt="Android" className="h-5 w-5" />
+          Get the ResQWave App
         </Button>
         {/* <Button className="bg-gradient-to-t from-[#3B82F6] to-[#5898FF] hover:from-[#2563eb] hover:to-[#60a5fa] transition-colors
             duration-300 cursor-pointer text-white text-[14px] px-6 py-2 rounded ml-1 font-medium" onClick={() => navigate('/register-focal')}>
@@ -81,10 +79,9 @@ export function LandingHeader({ navOpen, setNavOpen, isScrolled, showHeader }: {
             <a href="#impact" className="hover:text-blue-400 transition w-full font-semibold" onClick={() => setNavOpen(false)}>Impact</a>
             <a href="#faqs" className="hover:text-blue-400 transition w-full font-semibold" onClick={() => setNavOpen(false)}>FAQs</a>
           </nav>
-          <Button className="bg-[#5B9EFF] hover:bg-[#4A8EEE] text-white px-6 py-3 rounded-[5px] w-full cursor-pointer flex items-center justify-center gap-3 text-base font-medium" onClick={() => { setNavOpen(false); }}>
-            Get the App
+          <Button className="bg-[#5B9EFF] hover:bg-[#4A8EEE] text-white px-6 py-4 rounded-[5px] w-full cursor-pointer flex items-center justify-center gap-3 text-base font-medium" onClick={() => { setNavOpen(false); }}>
             <img src={androidIcon} alt="Android" className="h-6 w-6" />
-            <img src={iosIcon} alt="iOS" className="h-6 w-6" />
+            Get the ResQWave App
           </Button>
           {/* <Button className="from-[#3B82F6] to-[#70A6FF] hover:from-[#2563eb] hover:to-[#60a5fa] text-white px-6 py-2 rounded w-full cursor-pointer" onClick={() => { setNavOpen(false); navigate('/register-focal'); }}>
             Register
