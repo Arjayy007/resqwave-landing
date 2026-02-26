@@ -3,7 +3,7 @@ import { MonitorSmartphone, Waves } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
 
-mapboxgl.accessToken = "pk.eyJ1Ijoicm9kZWxsbCIsImEiOiJjbWU0OXNvb2gwYnM0MnpvbXNueXo2dzhxIn0.Ep43_IxVhaPhEqWBaAuuyA";
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 export function LandingHero() {
   const mapContainer = useRef<HTMLDivElement>(null);

@@ -115,7 +115,7 @@ export function LandingGoal() {
                     <div className="tabs_let-content min-h-screen flex items-center opacity-30 transition-opacity duration-500">
                         <div>
                             <div className="flex gap-3 mb-6">
-                                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px] border border-zinc-700/50 transition-all duration-300 hover:bg-zinc-800/70 hover:border-zinc-600/70 hover:scale-105 cursor-pointer">
+                                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px]">
                                     <Info className="w-4 h-4 text-zinc-300" />
                                     <span className="text-sm text-zinc-300">Why ResQWave Matters</span>
                                 </div>
@@ -170,7 +170,7 @@ export function LandingGoal() {
                     <div className="tabs_let-content min-h-screen flex items-center opacity-30 transition-opacity duration-500">
                         <div>
                             <div className="flex gap-3 mb-6">
-                                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px] border border-zinc-700/50 transition-all duration-300 hover:bg-zinc-800/70 hover:border-zinc-600/70 hover:scale-105 cursor-pointer">
+                                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px]">
                                     <Info className="w-4 h-4 text-zinc-300" />
                                     <span className="text-sm text-zinc-300">Our Mission</span>
                                 </div>
