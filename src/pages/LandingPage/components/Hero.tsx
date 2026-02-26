@@ -123,16 +123,22 @@ export function LandingHero() {
           },
           { 
             coords: [121.0596652039547, 14.752071361725228] as [number, number], 
-            color: "#3b82f6",
-            label: "Safe — No Alert",
-            id: "blue"
+            color: "#22c55e",
+            label: "Online",
+            id: "green"
+          },
+          { 
+            coords: [121.0599999949547, 14.75595959598] as [number, number], 
+            color: "#6b7280",
+            label: "Offline",
+            id: "gray"
           },
         ];
 
-        // Add circles for each pin (excluding blue pin)
+        // Add circles for each pin (excluding green and gray pins)
         pins.forEach((pin) => {
-          // Skip blue pin - no circle
-          if (pin.id === "blue") return;
+          // Skip green and gray pins - no circle
+          if (pin.id === "green" || pin.id === "gray") return;
           
           const circleSourceId = `pin-circle-${pin.id}`;
           const circleLayerId = `pin-circle-layer-${pin.id}`;
@@ -245,6 +251,42 @@ export function LandingHero() {
           // Start animations after delays
           setTimeout(() => animateRedCircle1(), 1000);
           setTimeout(() => animateRedCircle2(), 1000);
+        }
+
+        // Animate yellow pin circle with pulsing effect
+        const yellowPin = pins.find(pin => pin.id === "yellow");
+        if (yellowPin) {
+          const pinId = yellowPin.id;
+          const pinCoords = yellowPin.coords;
+
+          const minRadius = 120;
+          const maxRadius = 180;
+          let growing = true;
+          let currentRadius = minRadius;
+
+          function animateYellowCircle() {
+            if (growing) {
+              currentRadius += 0.9;
+              if (currentRadius >= maxRadius) {
+                growing = false;
+              }
+            } else {
+              currentRadius -= 0.9;
+              if (currentRadius <= minRadius) {
+                growing = true;
+              }
+            }
+
+            const source = map.getSource(`pin-circle-${pinId}`) as mapboxgl.GeoJSONSource;
+            if (source) {
+              source.setData(createCircle(pinCoords, currentRadius));
+            }
+
+            requestAnimationFrame(animateYellowCircle);
+          }
+
+          // Start animation after delay
+          setTimeout(() => animateYellowCircle(), 1000);
         }
 
 
@@ -491,10 +533,16 @@ export function LandingHero() {
                 <div>The user clicked the distress signal of LoRa terminal calling for rescue.</div>
               </>
             )}
-            {hoveredPin.color === "#3b82f6" && (
+            {hoveredPin.color === "#22c55e" && (
               <>
-                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#3b82f6" }}>Normal</div>
-                <div>No distress signal detected.</div>
+                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#22c55e" }}>Online</div>
+                <div>Online terminal with no distress signal detected.</div>
+              </>
+            )}
+            {hoveredPin.color === "#6b7280" && (
+              <>
+                <div style={{ fontWeight: "600", marginBottom: "4px", color: "#6b7280" }}>Offline</div>
+                <div>Terminal is offline.</div>
               </>
             )}
             
