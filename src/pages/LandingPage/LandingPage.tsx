@@ -57,17 +57,17 @@ export function LandingPage() {
     <div className="min-h-screen text-white flex flex-col bg-[#171717] relative overflow-x-hidden w-full">
       {/* Global Radial Gradient Backgrounds with animation */}
       <div
-        className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(600px,80vw,900px)] h-[clamp(600px,80vw,900px)] -right-[10%] top-[85%] lg:top-[90%]"
+        className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(300px,45vw,500px)] h-[clamp(300px,45vw,500px)] -right-[10%] top-[85%] lg:top-[90%]"
         style={{
           background:
-            "radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 50%, rgba(23, 23, 23, 0.1) 100%)",
+            "radial-gradient(circle, rgba(0, 30, 90, 0.28) 0%, rgba(0, 50, 150, 0.28) 50%, rgba(23, 23, 23, 0.1) 100%)",
         }}
       />
       <div
-        className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(650px,85vw,950px)] h-[clamp(650px,85vw,950px)] -left-[15%] lg:-left-[10%] -top-[30%] lg:-top-[35%]"
+        className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(350px,50vw,550px)] h-[clamp(350px,50vw,550px)] -left-[15%] lg:-left-[10%] -top-[30%] lg:-top-[35%]"
         style={{
           background:
-            "radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 40%, rgba(23, 23, 23, 0.1) 100%)",
+            "radial-gradient(circle, rgba(0, 30, 90, 0.28) 0%, rgba(0, 50, 150, 0.28) 40%, rgba(23, 23, 23, 0.1) 100%)",
         }}
       />
       {/* Header */}
