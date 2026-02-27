@@ -114,7 +114,11 @@ export function LandingGoal() {
           <source src={videoUrl} type="video/mp4" />
         </video>
         {/* Fade overlay on the right side */}
-        <div className="absolute top-0 right-0 w-full lg:w-[85vw] h-full bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-full lg:w-[85vw] h-full bg-gradient-to-l from-[#171717] via-[#171717]/80 to-transparent pointer-events-none"></div>
+        {/* Fade overlay on the top */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#171717] via-[#171717]/50 to-transparent pointer-events-none"></div>
+        {/* Fade overlay on the bottom */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#171717] via-[#171717]/50 to-transparent pointer-events-none"></div>
       </div>
 
       {/* Scrollable Content */}
