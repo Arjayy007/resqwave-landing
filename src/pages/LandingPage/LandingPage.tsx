@@ -17,19 +17,19 @@ export function LandingPage() {
 
   useEffect(() => {
     let ticking = false;
-    
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          
+
           // Apply background/fixed style after minimal scroll
           if (currentScrollY > 20) {
             setIsScrolled(true);
           } else {
             setIsScrolled(false);
           }
-          
+
           // Hide/show logic - only when scrolled down significantly
           if (currentScrollY < 100) {
             // Always show near top
@@ -41,7 +41,7 @@ export function LandingPage() {
             // Scrolling down (with small buffer to avoid jitter)
             setShowHeader(false);
           }
-          
+
           setLastScrollY(currentScrollY);
           ticking = false;
         });
@@ -49,8 +49,8 @@ export function LandingPage() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
   return (
@@ -59,17 +59,24 @@ export function LandingPage() {
       <div
         className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(600px,80vw,900px)] h-[clamp(600px,80vw,900px)] -right-[10%] top-[85%] lg:top-[90%]"
         style={{
-          background: 'radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 50%, rgba(23, 23, 23, 0.1) 100%)',
+          background:
+            "radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 50%, rgba(23, 23, 23, 0.1) 100%)",
         }}
       />
       <div
         className="fixed z-0 rounded-full pointer-events-none blur-[100px] w-[clamp(650px,85vw,950px)] h-[clamp(650px,85vw,950px)] -left-[15%] lg:-left-[10%] -top-[30%] lg:-top-[35%]"
         style={{
-          background: 'radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 40%, rgba(23, 23, 23, 0.1) 100%)',
+          background:
+            "radial-gradient(circle, rgba(0, 65, 161, 0.1) 0%, rgba(0, 97, 255, 0.1) 40%, rgba(23, 23, 23, 0.1) 100%)",
         }}
       />
       {/* Header */}
-      <LandingHeader navOpen={navOpen} setNavOpen={setNavOpen} isScrolled={isScrolled} showHeader={showHeader} />
+      <LandingHeader
+        navOpen={navOpen}
+        setNavOpen={setNavOpen}
+        isScrolled={isScrolled}
+        showHeader={showHeader}
+      />
       {/* Hero Section */}
       <LandingHero />
       <LandingGoal />
@@ -80,8 +87,6 @@ export function LandingPage() {
       <LandingFooter />
       {/* Floating Chatbot Widget */}
       <ChatbotConvo />
-     
     </div>
   );
 }
-
