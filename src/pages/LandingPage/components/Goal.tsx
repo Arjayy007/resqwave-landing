@@ -1,12 +1,13 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Info } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import pic1 from "../../../assets/pic1.jpg";
 
 const cloudName = import.meta.env.VITE_CLOUDINARY_NAME;
 
-// Optimized video URL with quality and format settings
-const videoUrl = `https://res.cloudinary.com/${cloudName}/video/upload/w_1920,h_1080,c_fill,q_auto:low,f_auto,vc_auto/AdobeStock_428035875_1_hc8qmd.mp4`;
+// Optimized GIF URL with quality and format settings
+const gifUrl = `https://res.cloudinary.com/${cloudName}/image/upload/AdobeStock_428035875_1_ejvuc1`;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +15,7 @@ export function LandingGoal() {
   const introWrapperRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
+  const [showImage, setShowImage] = useState(false);
 
   useEffect(() => {
     if (!introWrapperRef.current || !videoContainerRef.current) return;
@@ -48,6 +50,11 @@ export function LandingGoal() {
         const wrapperOffset = wrapper.offsetTop;
         const scrollPosition = window.scrollY - wrapperOffset;
         const windowHeight = window.innerHeight;
+        const wrapperHeight = wrapper.offsetHeight;
+
+        // Check if we're past 50% of the section
+        const scrollProgress = scrollPosition / wrapperHeight;
+        setShowImage(scrollProgress >= 0.5);
 
         const sections = wrapper.querySelectorAll(".tabs_let-content");
         const lastSectionIndex = sections.length - 1;
@@ -103,16 +110,20 @@ export function LandingGoal() {
         ref={videoContainerRef}
         className="absolute top-0 left-0 w-full h-screen"
       >
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src={videoUrl} type="video/mp4" />
-        </video>
+        {/* GIF Background */}
+        <img
+          src={gifUrl}
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+          style={{ opacity: showImage ? 0 : 1 }}
+        />
+        {/* Image Background */}
+        <img
+          src={pic1}
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+          style={{ opacity: showImage ? 1 : 0 }}
+        />
         {/* Fade overlay on the right side */}
         <div className="absolute top-0 right-0 w-full lg:w-[85vw] h-full bg-gradient-to-l from-[#171717] via-[#171717]/80 to-transparent pointer-events-none"></div>
         {/* Fade overlay on the top */}
