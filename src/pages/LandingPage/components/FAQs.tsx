@@ -56,7 +56,7 @@ const FAQS = [
 export const LandingFAQs = memo(function LandingFAQs() {
 
   return (
-    <section id="faqs" className="w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <section id="faqs" className="w-full min-h-screen py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Badge */}
         <div className="flex justify-center mb-6 sm:mb-8">
