@@ -54,10 +54,12 @@ const FAQS = [
 ] as const;
 
 export const LandingFAQs = memo(function LandingFAQs() {
-
   return (
-    <section id="faqs" className="w-full min-h-screen py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
+    <section
+      id="faqs"
+      className="w-full min-h-screen flex flex-col justify-center py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
+    >
+      <div className="max-w-3xl mx-auto w-full">
         {/* Badge */}
         <div className="flex justify-center mb-6 sm:mb-8">
           <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-[5px]">
@@ -79,10 +81,10 @@ export const LandingFAQs = memo(function LandingFAQs() {
               value={faq.id}
               className="border-b border-white/20"
             >
-              <AccordionTrigger className="text-white hover:no-underline text-base py-5">
+              <AccordionTrigger className="text-white hover:no-underline text-lg py-5">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-gray-400 text-md leading-relaxed">
+              <AccordionContent className="text-gray-400 text-base text-justify leading-relaxed">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
