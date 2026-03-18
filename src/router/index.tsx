@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { LandingPage } from "../pages/index";
+import { DownloadApp, LandingPage } from "../pages";
 
 export const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
+  { path: "/download", element: <DownloadApp /> },
 ]);

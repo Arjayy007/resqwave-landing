@@ -95,11 +95,11 @@ export function LandingCTA() {
                   <style>{`
                     .blue-ripple .animate-ripple {
                       background: rgba(59, 130, 246, 0.15);
-                      border-color: rgba(96, 165, 250, 0.3);
+                      border-color: rgba(59, 130, 246, 0.6);
                     }
                   `}</style>
                   <Ripple
-                    mainCircleSize={150}
+                    mainCircleSize={250}
                     mainCircleOpacity={0.3}
                     numCircles={6}
                     className="blue-ripple"

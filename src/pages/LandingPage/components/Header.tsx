@@ -1,6 +1,7 @@
 import androidIcon from "@/assets/android.png";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import resqwave_logo from "/resqwave_logo.png";
 
 export function LandingHeader({
@@ -14,6 +15,7 @@ export function LandingHeader({
   isScrolled: boolean;
   showHeader: boolean;
 }) {
+  const navigate = useNavigate();
   return (
     <header
       className={`flex items-center justify-between px-8 md:px-16 py-4 md:py-6 w-full fixed top-0 left-0 right-0`}
@@ -81,7 +83,7 @@ export function LandingHeader({
       <div className="hidden md:flex md:w-55 items-center">
         <Button
           className="bg-[#5B9EFF] hover:bg-[#4A8EEE] transition-colors duration-300 cursor-pointer text-white text-sm px-5 py-5 rounded-[5px] font-medium flex items-center gap-2"
-          onClick={() => {}}
+          onClick={() => navigate("/download")}
         >
           <img src={androidIcon} alt="Android" className="h-5 w-5" />
           Get the ResQWave App
@@ -142,6 +144,7 @@ export function LandingHeader({
           <Button
             className="bg-[#5B9EFF] hover:bg-[#4A8EEE] text-white px-6 py-4 rounded-[5px] w-full cursor-pointer flex items-center justify-center gap-3 text-base font-medium"
             onClick={() => {
+              navigate("/download");
               setNavOpen(false);
             }}
           >
